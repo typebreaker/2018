@@ -25,9 +25,7 @@ public class main {
 		BufferedReader fileReader = new BufferedReader(new InputStreamReader(bis));
 		
 		String total = "";
-//		while(bis.available() > 0) {
-//			total+=(char)bis.read();
-//		}
+
 		String temp=null;
 		while((temp = fileReader.readLine())!=null) {
 			total+=temp;
