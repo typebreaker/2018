@@ -18,11 +18,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class main {
+public class Main {
 
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
+		new MainGUI();
 		Map<String, Integer> hash = new HashMap<>();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String filePath = br.readLine();
