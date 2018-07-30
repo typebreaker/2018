@@ -100,6 +100,8 @@ public class MainGUI extends JFrame {
 				
 			}
 		});
+		
+		
 		insertPanel.add(filePathText);
 		insertPanel.add(insertBtn);
 		
