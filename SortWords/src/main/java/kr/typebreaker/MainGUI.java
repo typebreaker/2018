@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.twitter.penguin.korean.TwitterKoreanProcessor;
+
 import main.java.kr.typebreaker.common.Utils;
 
 public class MainGUI extends JFrame {
