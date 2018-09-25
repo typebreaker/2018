@@ -58,7 +58,7 @@ public class Utils {
 		Map<String, Integer> hash = new HashMap<>();
 		
 		for(KoreanPhraseExtractor.KoreanPhrase item : phrases) {
-			if(hash.get(item.text()) != null)
+			if(hash.get(item.text()) == null)
 				hash.put(item.text(), 1);
 			else
 				hash.put(item.text(), hash.get(item.text())+1);
