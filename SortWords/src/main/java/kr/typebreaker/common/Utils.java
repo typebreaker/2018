@@ -16,8 +16,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import scala.collection.Seq;
+import com.twitter.penguin.korean.tokenizer.KoreanTokenizer;
+import com.twitter.penguin.korean.TwitterKoreanProcessorJava;
+import com.twitter.penguin.korean.phrase_extractor.KoreanPhraseExtractor;
+
 public class Utils {
 
+	
 	public static final String fileRead(String filePath) {
 		String total="";
 		BufferedInputStream bis = null;
@@ -43,29 +49,19 @@ public class Utils {
 	}
 	
 	public static final Map<String, Integer> parsingToHashMap(String sentense) {
-		sentense=sentense.replaceAll("은", "");
-		sentense=sentense.replaceAll("하는", "");
-		sentense=sentense.replaceAll("는", "");
-		sentense=sentense.replaceAll("이", "");
-		sentense=sentense.replaceAll("가", "");
-		sentense=sentense.replaceAll("을", "");
-		sentense=sentense.replaceAll("를", "");
-		sentense=sentense.replaceAll("에게", "");
-		sentense=sentense.replaceAll("이라서", "");
-		sentense=sentense.replaceAll("있습니다", "");
-		sentense=sentense.replaceAll("했습니다", "");
-		sentense=sentense.replaceAll("하였습니다", "");
-		sentense=sentense.replaceAll("습니다", "");
-		sentense=sentense.replaceAll("니다", "");
-		String[] words = sentense.split(" ");
+		
+		CharSequence normalized = TwitterKoreanProcessorJava.normalize(sentense);
+		Seq<KoreanTokenizer.KoreanToken> tokens = TwitterKoreanProcessorJava.tokenize(normalized);
+		List<KoreanPhraseExtractor.KoreanPhrase> phrases = TwitterKoreanProcessorJava.extractPhrases(tokens, true, true);
+		
 		
 		Map<String, Integer> hash = new HashMap<>();
 		
-		for(int i=0;i<words.length;i++) {
-			if(hash.get(words[i])==null)
-				hash.put(words[i], 1);
+		for(KoreanPhraseExtractor.KoreanPhrase item : phrases) {
+			if(hash.get(item.text()) != null)
+				hash.put(item.text(), 1);
 			else
-				hash.put(words[i], hash.get(words[i])+1);
+				hash.put(item.text(), hash.get(item.text())+1);
 		}
 		
 		return hash;

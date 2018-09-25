@@ -59,7 +59,6 @@ public class MainGUI extends JFrame {
 		resultMap = new HashMap<>();
 		mainContainer = this.getContentPane();
 		insertPanel = new JPanel();
-//		processPanel = new JPanel();
 		filePathText = new JTextField(15);
 		upLoadBtn = new JButton("파일생성");
 		insertBtn = new JButton("작업");
