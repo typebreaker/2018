@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -60,7 +61,7 @@ public class MainGUI extends JFrame {
 		mainContainer = this.getContentPane();
 		insertPanel = new JPanel();
 		filePathText = new JTextField(15);
-		upLoadBtn = new JButton("파일생성");
+		upLoadBtn = new JButton("저장");
 		insertBtn = new JButton("작업");
 		clearBtn = new JButton("초기화");
 		wordsCountText = new JTextArea("총 단어수 : "+resultMap.size()+"개 입니다.");
@@ -91,10 +92,19 @@ public class MainGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Utils.makeFile(resultMap, "D:/result.txt");
-				wordsCountText.setText("파일 생성이 완료되었습니다.");
+				JFileChooser chooser = new JFileChooser();// 객체 생성
+				chooser.setCurrentDirectory(new File("C:\\")); // 맨처음경로를 C로 함
+				chooser.setFileSelectionMode(chooser.DIRECTORIES_ONLY); // 디렉토리만 선택가능
+				
+				if(chooser.showSaveDialog(null) == chooser.APPROVE_OPTION) {
+					Utils.makeFile(resultMap, chooser.getSelectedFile().getAbsolutePath() + "\\"+"단어처리결과.txt");
+					wordsCountText.setText("파일 생성이 완료되었습니다.");
+				}
+				
 			}
 		});
+		
+		
 		dropTarget = new DropTarget(mainContainer, new DropTargetListener() {
 			
 			@Override

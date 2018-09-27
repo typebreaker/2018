@@ -54,6 +54,10 @@ public class Utils {
 		Seq<KoreanTokenizer.KoreanToken> tokens = TwitterKoreanProcessorJava.tokenize(normalized);
 		List<KoreanPhraseExtractor.KoreanPhrase> phrases = TwitterKoreanProcessorJava.extractPhrases(tokens, true, true);
 		
+//		List<KoreanTokenizer.KoreanToken> tokensList = scala.collection.JavaConversions.seqAsJavaList(tokens);
+//		for(KoreanTokenizer.KoreanToken item : tokensList) {
+//			item.pos()
+//		}
 		
 		Map<String, Integer> hash = new HashMap<>();
 		
